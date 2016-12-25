@@ -1,0 +1,22 @@
+{
+    "dev": {
+    	"project_name":"FlickrToGeoJSON",
+        "lambda_description": "Lambda function to generate GeoJSON from a Flickr partial request",
+        "s3_bucket": "zappa-versions",
+        "app_function": "flickr_to_geojson.app",
+        "profile_name": "jorge",
+        "role_name" : "lambda_basic_execution",
+        "keep_warm": false,
+        "log_level": "INFO",
+        "aws_region": "us-east-1",
+        "http_methods": ["GET"],
+        "parameter_depth": 1,
+        "timeout_seconds": 300,
+        "memory_size": 128,
+        "use_precompiled_packages": true,
+        "environment_variables": {
+        	"FLICKR_API_KEY" : "YOUR_API_KEY",
+        	"FLICKR_FILE_NAME" : "flickr_map"
+        },
+    }
+}
