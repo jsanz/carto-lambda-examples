@@ -31,14 +31,18 @@ up.html).
 
 ## Proxy to convert into GeoJSON
 
+[Source code](flickr_to_geojson.py)
+
 This script converts responses from [Flickr API](https://www.flickr.com/services/api/)
 to GeoJSON feature collections so you can feed them to CARTO as a Synchronized
-Table or as a normal (one shot) upload.
+Table or as a normal (one shot) upload. It's quite straight forward to read, just
+go to the `@app.route...` line as the starting point and follow the procedure
+to parse the parameters. Main logic for Flickr is at the `getPhotos` function.
 
-You need to register your own Flickr application to get an API key and put into
-the `zappa_settings.json` file. You can also configure the default name of the
-file that the end point will put in the HTTP header. Then you only need to
-deploy it to AWS with:
+If you want to run this script on your own account you need to register your own
+Flickr application to get an API key and put into the `zappa_settings.json`
+file. You can also configure the default name of the file that the end point
+will put in the HTTP header. Then you only need to deploy it to AWS with:
 
 ```
 (dev)$ zappa deploy dev
@@ -57,10 +61,10 @@ Deploying API Gateway..
 Deployment complete!: https://you-api-entrypoint.amazonaws.com/dev
 ```
 
-**NOTE: You may need to tweak the configuration file if you are using different
-**profiles on your AWS credentials, want to deploy in other zones, etc. Check
-**the [Advanced settings](https://github.com/Miserlou/Zappa#advanced-settings)
-**section of the official documentation.
+**NOTE**: You may need to tweak the configuration file if you are using different
+profiles on your AWS credentials, want to deploy in other zones, etc. Check
+the [Advanced settings](https://github.com/Miserlou/Zappa#advanced-settings)
+section of the official documentation.
 
 This will create the Lambda function and the API Gateway entry and will give you
 a URL of your API end point, say `https://you-api-entrypoint.amazonaws.com/dev`.
@@ -77,7 +81,8 @@ provide a `extras` parameter sensible defaults will be used.
 
 The URL for the entry point has been exported as `FLICKR2GEOJSON` for convenience.
 
-Retrieve the last 10 photos of the [Your Best Shot 2016] group using the method
+Retrieve the last 10 photos of the [Your Best Shot 2016](https://www.flickr.com/groups/yourbestshot2016)
+group using the method
 [`flickr.groups.pools.getPhotos`](https://www.flickr.com/services/api/flickr.gro
 ups.pools.getPhotos.html):
 
@@ -97,7 +102,8 @@ $ curl -s "$FLICKR2GEOJSON??method=flickr.groups.pools.getPhotos&group_id=154651
 "_DESVAN_bn"
 ```
 
-Retrieve the last 100 most interesting pictures using the method [`flickr.interestingness.getList`](`https://www.flickr.com/services/api/flickr.interestingness.getList.html`):
+Retrieve the last 100 most interesting pictures using the method
+[`flickr.interestingness.getList`](https://www.flickr.com/services/api/flickr.interestingness.getList.html):
 
 ```
 curl -s "$FLICKR2GEOJSON??method=flickr.interestingness.getList&per_page=100&file_name=flickr_interesting" \
