@@ -31,7 +31,7 @@ up.html).
 
 ## Proxy to convert into GeoJSON
 
-[Source code](flickr_to_geojson.py) · [Blog post](https://geomaticblog.net/2016/12/26/creating-a-collaborative-photo-map-from-flickr-to-carto-with-amazon-lambda/)
+[Source code](flickr_to_geojson/flickr_to_geojson.py) · [Blog post](https://geomaticblog.net/2016/12/26/creating-a-collaborative-photo-map-from-flickr-to-carto-with-amazon-lambda/)
 
 This script converts responses from [Flickr API](https://www.flickr.com/services/api/)
 to GeoJSON feature collections so you can feed them to CARTO as a Synchronized
