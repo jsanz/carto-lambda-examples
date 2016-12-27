@@ -1,0 +1,23 @@
+{
+    "dev": {
+    	"project_name":"BambooToGeoJSON",
+        "lambda_description": "Lambda function to generate a GeoJSON of Bamboo employees",
+        "s3_bucket": "zappa-versions",
+        "app_function": "bamboo.app",
+        "profile_name": "jorge",
+        "role_name" : "lambda_basic_execution",
+        "keep_warm": false,
+        "log_level": "INFO",
+        "aws_region": "us-east-1",
+        "http_methods": ["GET"],
+        "parameter_depth": 1,
+        "timeout_seconds": 300,
+        "memory_size": 128,
+        "use_precompiled_packages": true,
+        "environment_variables": {
+            "FILE_NAME"    : "bamboo_employees",
+            "BAMBOO_TOKEN" : "yourtoken",
+            "BAMBOO_API"   : "https://api.bamboohr.com/api/gateway.php/yourcompany/v1/employees/directory"
+        }
+    }
+}
