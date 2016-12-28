@@ -30,8 +30,7 @@ def getPhotos(arguments):
         "format": "json",
         "nojsoncallback": "1",
         "per_page": 5,
-        "method": "flickr.groups.pools.getPhotos",
-        "group_id": "1463451@N25"
+        "has_geo": 1
     }
 
     # Create a complete querystring for Flickr
@@ -59,6 +58,13 @@ def getPhotos(arguments):
             "url_t",
             "url_m",
             "url_o"])
+
+    # Assure method is on the querystring and if not put a default query
+    if not 'method' in querystring:
+        querystring.update({
+            "method": "flickr.groups.pools.getPhotos",
+            "group_id": "1463451@N25"
+        })
 
     logger.debug(pprint.pprint(querystring))
     response = requests.request("GET", url, params=querystring)
